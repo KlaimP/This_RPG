@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Control : MonoBehaviour
 {
+    
     public float speed;
     public Image HealthBar;
     public Text HPt;
@@ -16,7 +17,7 @@ public class Control : MonoBehaviour
     private Vector3 change;
     private Animator animator;
     private float hpK, mpK;
-
+    
     
     // Start is called before the first frame update
     void Start()
@@ -31,8 +32,8 @@ public class Control : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        HealthBar.fillAmount = HP / hpK;  //Для получение 1
+    {      
+    HealthBar.fillAmount = HP / hpK;  //Для получение 1
         if(HP<0)
         {
             HP=0;
@@ -51,7 +52,6 @@ public class Control : MonoBehaviour
             Mana=mpK;
         }
         ManaBar.fillAmount = Mana / mpK;
-
         HPt.text = HP.ToString("f0") + "/" + hpK.ToString("f0");
         MPt.text = Mana.ToString("f0") + "/" + mpK.ToString("f0");
 
@@ -62,15 +62,15 @@ public class Control : MonoBehaviour
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
 
-        if(change != Vector3.zero)
+        if (change == Vector3.zero)
+        {
+            animator.SetBool("moving", false);
+        }
+        else
         {
             animator.SetFloat("moveX", change.x);
             animator.SetFloat("moveY", change.y);
             animator.SetBool("moving", true);
-        }
-        else
-        {
-            animator.SetBool("moving", false);
         }
     }
 

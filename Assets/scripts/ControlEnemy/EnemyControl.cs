@@ -39,6 +39,7 @@ public class EnemyControl : MonoBehaviour
             Destroy(gameObject);
         }
         
+        
     }
     void FixedUpdate()
     {
@@ -53,6 +54,7 @@ public class EnemyControl : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         HPEnemyT.SetActive(true);
+        Angry = true;
     }
 
     void OnTriggerExit2D(Collider2D other)
