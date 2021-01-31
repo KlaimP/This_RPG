@@ -12,6 +12,7 @@ public class EnemyControl : MonoBehaviour
     private Vector2 moveVelocity;
     private Vector3 change;
     private Rigidbody2D rb;
+    private Animator animator;
     Transform playerT;
     public bool Angry = false;
     // Start is called before the first frame update
@@ -21,6 +22,7 @@ public class EnemyControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         HPenemy.drawMode = SpriteDrawMode.Tiled;
         HPEnem=100;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -31,7 +33,8 @@ public class EnemyControl : MonoBehaviour
         moveVelocity = moveInput.normalized * speed; 
         
         change = Vector3.zero;
-
+        change.x = Input.GetAxis("Horisontal");
+    
         HPenemy.size = new Vector2(HPEnem/16,6);
 
         if(HPEnem==0)
@@ -39,14 +42,23 @@ public class EnemyControl : MonoBehaviour
             Destroy(gameObject);
         }
         
-        
+        if (change == Vector3.zero)
+        {
+            animator.SetBool("moving", false);
+        }
+        else
+        {
+            animator.SetFloat("movex", change.x);
+            animator.SetFloat("movey", change.y);
+            animator.SetBool("moving", true);
+        }
     }
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + moveVelocity*Time.fixedDeltaTime);
         if(Angry==true)
         {
-        transform.position = Vector2.MoveTowards(transform.position, playerT.position, speed*Time.fixedDeltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, playerT.position, speed*Time.fixedDeltaTime);
         }
         
     }
