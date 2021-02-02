@@ -8,7 +8,7 @@ public class EnemyControl : MonoBehaviour
     public SpriteRenderer HPenemy;
     public GameObject HPEnemyT;
     public float speed;
-    public float HPEnem;
+    [SerializeField] public float HPEnem;
     private Vector2 moveVelocity;
     private Vector3 change;
     private Rigidbody2D rb;
@@ -33,11 +33,11 @@ public class EnemyControl : MonoBehaviour
         moveVelocity = moveInput.normalized * speed; 
         
         change = Vector3.zero;
-        change.x = Input.GetAxis("Horisontal");
-    
+        
+
         HPenemy.size = new Vector2(HPEnem/16,6);
 
-        if(HPEnem==0)
+        if(HPEnem<=0)
         {
             Destroy(gameObject);
         }
@@ -63,14 +63,21 @@ public class EnemyControl : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.tag=="Player")
+        {
         HPEnemyT.SetActive(true);
         Angry = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         HPEnemyT.SetActive(false);
+    }
+
+    public void TakeDamage(int damage){
+        HPEnem -= damage;
     }
 }

@@ -7,6 +7,7 @@ public class Control : MonoBehaviour
 {
     
     public float speed;
+    public Transform ShotPoint;
     public Image HealthBar;
     public Text HPt;
     public Image ManaBar;
@@ -17,6 +18,7 @@ public class Control : MonoBehaviour
     private Vector3 change;
     private Animator animator;
     private float hpK, mpK;
+    float x,y;
     
     
     // Start is called before the first frame update
@@ -62,6 +64,25 @@ public class Control : MonoBehaviour
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
 
+        if (change.y >0)
+        {
+            ShotPoint.transform.localPosition = new Vector2(0f,0.15f);
+        }
+        else if (change.y < 0)
+        {
+            ShotPoint.transform.localPosition = new Vector2(0f, -0.15f);
+        }
+        else if (change.x > 0)
+        {
+            ShotPoint.transform.localPosition = new Vector2(0.15f,0f);
+        }
+        else if (change.x < 0)
+        {
+            ShotPoint.transform.localPosition = new Vector2(-0.15f,0f);
+        }
+        
+        
+        
         if (change == Vector3.zero)
         {
             animator.SetBool("moving", false);
