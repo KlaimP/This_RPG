@@ -24,11 +24,7 @@ public class summonM : MonoBehaviour
         
         if (Input.GetKey(KeyCode.V))
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            while(Input.GetKey(KeyCode.V)){
             buttons.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            }
         }else{
             buttons.SetActive(false);
         }
