@@ -21,13 +21,18 @@ public class summonM : MonoBehaviour
     {
         x = ShotPoint.transform.localPosition.x;
         y = ShotPoint.transform.localPosition.y;
-
+        
         if (Input.GetKey(KeyCode.V))
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            while(Input.GetKey(KeyCode.V)){
             buttons.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            }
         }else{
             buttons.SetActive(false);
         }
+        
     }
 
     public void MagicSummon_Click()
