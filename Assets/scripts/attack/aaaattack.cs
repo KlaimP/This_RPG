@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class aaaattack : MonoBehaviour
 {
-    private float timeBtwAttack;
+    [SerializeField] private float timeBtwAttack;
     public float startTimeBtwAttack;
 
     public Transform attackPose;
@@ -21,11 +21,12 @@ public class aaaattack : MonoBehaviour
                     Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPose.position, attackRange, whatIsEnemy);
                     for (int i = 0; i < enemiesToDamage.Length; i++)
                     {
-                        enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(damage);
+                        enemiesToDamage[i].GetComponent<EnemyControl>().TakeDamage(damage);
                     }
-                    }
-
                     timeBtwAttack = startTimeBtwAttack;
+                    }
+               
+                    
                 }
                 else
                 {

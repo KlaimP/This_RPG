@@ -33,8 +33,7 @@ public class EnemyControl : MonoBehaviour
         moveVelocity = moveInput.normalized * speed; 
         
         change = Vector3.zero;
-        
-
+    
         HPenemy.size = new Vector2(HPEnem/16,6);
 
         if(HPEnem<=0)
